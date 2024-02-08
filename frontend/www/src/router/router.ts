@@ -1,4 +1,3 @@
-import { setCurrentUser } from "Model/store"
 import Navigo, { Match } from "navigo"
 
 declare var process : {
@@ -18,9 +17,6 @@ if (baseHRef) {
 const router = new Navigo(baseHRef)
 
 router.on({
-    "/customers/:id": (match: Match) => setCurrentUser(parseInt(match.data.id)),
-    "/customers": (_: Match) => setCurrentUser(undefined),
-    "/": () => router.navigate("/customers")
 })
 router.resolve()
 

@@ -1,12 +1,11 @@
 import { html, render } from "lit-html"
 
-import "./user/user-component"
-import "./user/user-table-component"
-import { store } from "Model/store"
+import "./user/rover-grid-component"
+import "./user/input-form"
+
+import { store } from "Model/store-rover"
 import { distinctUntilChanged } from "rxjs"
 import { Model } from "Model/model"
-import { User } from "Model/user"
-import { router } from "../router/router"
 
 class AppComponent extends HTMLElement {
     constructor() {
@@ -18,15 +17,25 @@ class AppComponent extends HTMLElement {
             .pipe(distinctUntilChanged())
             .subscribe(model => this.render(model))
     }
+
     private template(model: Model) {
+        console.log(model.photos)
+
+        console.log(model.photos);
+        
         return html`
-            <user-table ?hidden=${!!model.currentUserId} @user-selected=${(e: CustomEvent) => this.userSelected(e.detail.user)}></user-table>
-            <user-component ?hidden=${!model.currentUserId}></user-component>
+            <style>
+                h1 {
+                    text-align: center;
+                    font-family: Arial, Verdana, Helvetica;
+                }
+            </style>
+
+            <h1>Rover images</h1>
+            <photo-grid></photo-grid>
         `
     }
-    userSelected(user: User) {
-        router.navigate(`/customers/${user.id}`)
-    }
+
     private render(model: Model) {
         render(this.template(model), this.shadowRoot)
     }

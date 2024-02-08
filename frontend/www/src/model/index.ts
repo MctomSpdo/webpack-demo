@@ -1,5 +1,3 @@
 
-console.log("index loaded")
-
-export { store } from "./store"
-export { Model } from "./model"
+export { store } from "./store-rover"
+export { Model as NewModel } from "./model"
